@@ -1,4 +1,4 @@
-name: "@harpreetsahota/aimv2_embeddings"
+name: "@harpreetsahota/hiera_video_embeddings"
 description: Compute embeddings for video using Facebook Hiera Models
 version: 1.0.0
 fiftyone:
