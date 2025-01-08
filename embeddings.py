@@ -7,7 +7,6 @@ import fiftyone as fo
 from fiftyone.core.models import Model
 from fiftyone.core.utils import add_sys_path
 
-from importlib.util import find_spec
 from typing import List
 
 with add_sys_path(os.path.dirname(os.path.abspath(__file__))):
