@@ -45,8 +45,7 @@ class HieraVideoEmbeddings(foo.Operator):
             # A description for the operator
             description="Compute embeddings for video using a Hiera Model",
 
-            icon="/assets/icons8-meta.svg",
-
+            icon="/assets/video-frame-2-svgrepo-com.svg",
             )
 
     def resolve_input(self, ctx):
