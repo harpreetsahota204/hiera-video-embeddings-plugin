@@ -37,13 +37,13 @@ class HieraVideoEmbeddings(foo.Operator):
     def config(self):
         return foo.OperatorConfig(
             # The operator's URI: f"{plugin_name}/{name}"
-            name="compute_hiera_embeddings",  # required
+            name="compute_hiera_video_embeddings",  # required
 
             # The display name of the operator
-            label="Hiera embeddings",  # required
+            label="Hiera Video Embeddings",  # required
 
             # A description for the operator
-            description="Compute embeddings using a Hiera Model",
+            description="Compute embeddings for video using a Hiera Model",
 
             icon="/assets/icons8-meta.svg",
 
