@@ -85,7 +85,7 @@ class HieraVideoEmbeddingModel(Model):
             last_layer = intermediates[-1]
             emb = last_layer.mean(dim=[1,2,3])
             if self.normalize:
-                emb = self.model.norm(emb)
+                emb = self.model.norm(emb).detach()  # Add detach() after normalization
             terminal_embedding = emb.cpu().numpy()
             return terminal_embedding.squeeze()
 
@@ -95,7 +95,7 @@ class HieraVideoEmbeddingModel(Model):
             for tensor in intermediates:
                 emb = tensor.mean(dim=[1,2,3])
                 if self.normalize:
-                    emb = self.model.norm(emb)
+                    emb = self.model.norm(emb).detach()  # Add detach() after normalization
                 layer_embeddings.append(emb)
             hierarchical_embedding = torch.cat(layer_embeddings, dim=1).cpu().numpy()
             return hierarchical_embedding.squeeze()

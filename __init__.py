@@ -59,7 +59,7 @@ class HieraVideoEmbeddings(foo.Operator):
 
         model_dropdown = types.Dropdown(label="Choose the Hiera embedding model you want to use:")
 
-        for arch_key, arch_value in HIERA_MODELS:
+        for arch_key, arch_value in HIERA_MODELS.items():
             model_dropdown.add_choice(arch_value, label=arch_key)
 
         inputs.enum(
@@ -113,12 +113,6 @@ class HieraVideoEmbeddings(foo.Operator):
             required=True
         )
 
-        inputs.str(
-            "emb_field",            
-            required=True,
-            description="Name of the field to store the embeddings in."
-            )
-        
         inputs.bool(
             "normalize",
             default=False,
@@ -127,6 +121,12 @@ class HieraVideoEmbeddings(foo.Operator):
             description=("Depending on your use case you may want to normalize embeddings"),
             view=types.CheckboxView(),
         )
+
+        inputs.str(
+            "emb_field",            
+            required=True,
+            description="Name of the field to store the embeddings in."
+            )
         
         inputs.bool(
             "delegate",
