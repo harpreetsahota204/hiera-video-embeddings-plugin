@@ -19,6 +19,7 @@ def _handle_calling(
         checkpoint,
         emb_field,
         embedding_types, 
+        normalize,
         delegate=False
         ):
     ctx = dict(dataset=sample_collection)
@@ -28,6 +29,7 @@ def _handle_calling(
         checkpoint=checkpoint,
         emb_field=emb_field,
         embedding_types=embedding_types,
+        normalize=normalize,
         delegate=delegate
         )
     return foo.execute_operator(uri, ctx, params=params)
