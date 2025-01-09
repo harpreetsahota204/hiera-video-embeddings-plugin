@@ -30,14 +30,14 @@ class HieraVideoEmbeddingModel(Model):
         model (torch.nn.Module): The loaded Hiera model instance
         checkpoint (str): The model checkpoint identifier
         device (torch.device): Device used for computation (CPU/GPU)
-        normalize (bool): Whether to normalize embeddings
+        normalize (bool): Whether to normalize embeddings - only applies when using terminal embeddings
     """
     def __init__(
         self, 
         model_name: str, 
         checkpoint: str, 
         embedding_type: str,
-        normalize: bool
+        normalize: bool = False
     ):
         self.model_name = model_name
         self.checkpoint = checkpoint
@@ -48,6 +48,9 @@ class HieraVideoEmbeddingModel(Model):
         valid_types = ["terminal", "hierarchical"]
         if self.embedding_type not in valid_types:
             raise ValueError(f"Invalid embedding type: {embedding_type}. Must be one of {valid_types}")
+        
+        if normalize and embedding_type != "terminal":
+            raise ValueError("Normalization is only supported for terminal embeddings")
 
         self.model = torch.hub.load(
             "facebookresearch/hiera",
@@ -94,8 +97,6 @@ class HieraVideoEmbeddingModel(Model):
             layer_embeddings = []
             for tensor in intermediates:
                 emb = tensor.mean(dim=[1,2,3])
-                if self.normalize:
-                    emb = self.model.norm(emb).detach()  # Add detach() after normalization
                 layer_embeddings.append(emb)
             hierarchical_embedding = torch.cat(layer_embeddings, dim=1).cpu().numpy()
             return hierarchical_embedding.squeeze()
@@ -160,7 +161,7 @@ def run_embeddings_model(
     checkpoint: str,
     emb_field: str,
     embedding_types: str,
-    normalize: bool
+    normalize: bool = False
 ) -> None:
     """Run the Hiera embedding model on a FiftyOne dataset.
 
@@ -172,7 +173,7 @@ def run_embeddings_model(
         embedding_types (str): Type of embeddings to extract:
             - 'terminal': final layer embeddings (768-dim)
             - 'hierarchical': multi-scale embeddings (1440-dim)
-        normalize (bool, optional): Whether to L2 normalize the embeddings. Defaults to False.
+        normalize (bool, optional): Whether to normalize the embeddings. only applies to terimal embeddings
     """
     model = HieraVideoEmbeddingModel(
         model_name, 

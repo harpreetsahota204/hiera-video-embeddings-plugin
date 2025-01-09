@@ -102,7 +102,7 @@ class HieraVideoEmbeddings(foo.Operator):
         
         checkpoint.add_choice(
             "mae_k400_ft_k400", 
-            label="Finetunes",
+            label="Finetuned",
             description="Model finetuned on Kinetics Classes"
             )
         
@@ -118,7 +118,9 @@ class HieraVideoEmbeddings(foo.Operator):
             default=False,
             required=True,
             label="Normalize embeddings?",
-            description=("Depending on your use case you may want to normalize embeddings"),
+            description=(
+                "Depending on your use case you may want to normalize embeddings."
+                " Only applies when using `terminal` embeddings."),
             view=types.CheckboxView(),
         )
 
