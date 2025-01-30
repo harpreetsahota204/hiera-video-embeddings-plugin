@@ -29,13 +29,27 @@ Then, install the plugin:
 fiftyone plugins download https://github.com/harpreetsahota204/hiera-video-embeddings-plugin
 ```
 
+To install requirements:
+
+```shell
+fiftyone plugins requirements @harpreetsahota/hiera_video_embeddings --install
+```
+
+In order to use the plugin you need to have the following enviornment variable set:
+
+```python
+import os
+
+os.environ['FIFTYONE_ALLOW_LEGACY_ORCHESTRATORS'] = 'true'
+```
+
 ### Embedding Types
 
 The plugin supports two types of embeddings:
 
 - **Terminal Embedding (`terminal`)**: A 768-dimensional embedding vector derived from the final layer of the model. This represents the global semantic context of the video sequence. Can optionally be normalized.
   
-- **Hierarchical Embedding (`hierarchical`)**: A 1440-dimensional embedding vector that concatenates features across all intermediate outputs (96+192+384+768 = 1440 dimensions). This captures multi-scale representations of the video content.
+- **Hierarchical Embedding (`hierarchical`)**: A 1440-dimensional embedding vector that concatenates features across all intermediate outputs (96+192+384+768 = 1440 dimensions). This captures multi-scale representations of the video content. These embeddings cannot be normalized.
 
 ### Technical Details
 
@@ -94,8 +108,7 @@ You can compute Hiera embeddings directly through the FiftyOne App:
      - `terminal` - Final layer embedding (768-dim)
      - `hierarchical` - Multi-scale embedding (1440-dim)
    - **Field Name**: Enter the name for the embeddings field
-   - **Normalize**: (Optional) Whether to L2-normalize terminal embeddings
-
+   - **Normalize**: (Optional and only apples to `terminal` embeddings) Whether to L2-normalize terminal embeddings 
 
 The embeddings will be stored in the specified field name and can be used for similarity searches, visualization, or other downstream tasks. 
 
