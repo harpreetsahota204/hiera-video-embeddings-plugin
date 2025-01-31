@@ -186,3 +186,5 @@ def run_embeddings_model(
         model, 
         label_field=emb_field
         )
+    
+    dataset.reload()
