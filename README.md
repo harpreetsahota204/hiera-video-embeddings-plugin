@@ -158,6 +158,8 @@ await embedding_operator(
     )
 ```
 
+### ℹ️ **Important:** You must call `dataset.reload()` to have the embeddings registered to your Dataset.
+
 ## Next steps
 
 You would likely want to visualize these embeddings.
@@ -183,8 +185,6 @@ results = fob.compute_visualization(
 
 ```
 
-
-### ℹ️ **Important:** You must call `dataset.reload()` to have the embeddings registered to your Dataset.
 
 # Citation
 
