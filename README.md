@@ -158,6 +158,32 @@ await embedding_operator(
     )
 ```
 
+## Next steps
+
+You would likely want to visualize these embeddings.
+
+You can do that using the FiftyOne Brain. Here's what you need to do:
+
+1. Install `umap-learn`: `pip install umap-learn`
+
+2. Reduce dimensionality of embeddings:
+
+```python
+
+import fiftyone.brain as fob
+
+results = fob.compute_visualization(
+    dataset,
+    embeddings="<name-of-field>", # or whichever embedding field
+    method="umap",
+    brain_key="<name-of-dimensionality-reduced-embeddings-field>",
+    num_dims=2,
+    verbose=True,
+)
+
+```
+
+
 ### ℹ️ **Important:** You must call `dataset.reload()` to have the embeddings registered to your Dataset.
 
 # Citation
