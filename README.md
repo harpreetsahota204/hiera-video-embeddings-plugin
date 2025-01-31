@@ -109,10 +109,9 @@ You can compute Hiera embeddings directly through the FiftyOne App:
      - `hierarchical` - Multi-scale embedding (1440-dim)
    - **Field Name**: Enter the name for the embeddings field
    - **Normalize**: (Optional and only apples to `terminal` embeddings) Whether to L2-normalize terminal embeddings 
+5. After embeddings are computed you **must** call `dataset.reload()` to have them registered to your dataset.
 
 The embeddings will be stored in the specified field name and can be used for similarity searches, visualization, or other downstream tasks. 
-
-**Note:** text-image similarity search is not currently supported.
 
 ## Operators
 
@@ -158,6 +157,9 @@ await embedding_operator(
     delegate=True
     )
 ```
+
+### ℹ️ **Important:** You must call `dataset.reload()` to have the embeddings registered to your Dataset.
+
 # Citation
 
 You can read the paper here.
