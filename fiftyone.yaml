@@ -1,6 +1,6 @@
 name: "@harpreetsahota/hiera_video_embeddings"
 description: Compute embeddings for video using Facebook Hiera Models
-version: 1.0.0
+version: 1.0.1
 fiftyone:
   version: "*"
 url: https://github.com/harpreetsahota204/hiera-video-embeddings-plugin
